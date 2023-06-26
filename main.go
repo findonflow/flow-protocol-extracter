@@ -9,7 +9,6 @@ import (
 	jsondc "github.com/onflow/cadence/encoding/json"
 	"github.com/onflow/flow-go/cmd/util/cmd/common"
 	"github.com/onflow/flow-go/model/flow"
-	"github.com/sanity-io/litter"
 )
 
 func main() {
@@ -20,8 +19,8 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	dir := "badger"
-	db, err := badger.Open(badger.DefaultOptions(dir).WithReadOnly(true))
+	dir := "mainnet5"
+	db, err := badger.Open(badger.DefaultOptions(dir))
 	if err != nil {
 		panic(err)
 	}
@@ -60,11 +59,12 @@ func main() {
 	for _, ev := range blockEvents {
 		_, err := jsondc.Decode(ev.Payload)
 		if err != nil {
+		fmt.Println(string(ev.Payload))
 			panic(err)
 		}
 	}
 
-	litter.Dump(block)
+	fmt.Println("block", block.ID())
 	fmt.Println("transactions", len(transactions))
 	fmt.Println("txResult", len(txResults))
 	fmt.Println("events", len(blockEvents))
