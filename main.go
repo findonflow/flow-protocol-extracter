@@ -19,7 +19,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	dir := "mainnet5"
+	dir := "badger"
 	db, err := badger.Open(badger.DefaultOptions(dir))
 	if err != nil {
 		panic(err)
