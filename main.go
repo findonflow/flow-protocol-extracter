@@ -9,6 +9,7 @@ import (
 	jsondc "github.com/onflow/cadence/encoding/json"
 	"github.com/onflow/flow-go/cmd/util/cmd/common"
 	"github.com/onflow/flow-go/model/flow"
+	_ "github.com/onflow/cadence/runtime/stdlib"
 )
 
 func main() {
@@ -19,7 +20,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	dir := "badger"
+	dir := "/data/sporks/mainnet5"
 	db, err := badger.Open(badger.DefaultOptions(dir))
 	if err != nil {
 		panic(err)
